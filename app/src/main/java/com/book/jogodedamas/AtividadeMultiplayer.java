@@ -32,4 +32,43 @@ public class AtividadeMultiplayer extends Atividade {
         return true;
 
     }
+
+    // desconectar do servidor
+
+
+    @Override
+    protected void onDestroy() {
+
+        Thread th = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                vm.getEscrever().println("sair");
+            }
+        }); th.start();
+
+
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onRestart() {
+
+        super.onRestart();
+    }
+
+    @Override
+    protected void onPause() {
+
+        Thread th = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                vm.getEscrever().println("sair");
+            }
+        });
+        th.start();
+
+        super.onPause();
+    }
 }

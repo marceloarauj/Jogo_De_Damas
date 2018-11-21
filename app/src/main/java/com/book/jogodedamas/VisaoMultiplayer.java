@@ -1,5 +1,6 @@
 package com.book.jogodedamas;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -473,12 +474,19 @@ public class VisaoMultiplayer extends Visao{
 
                           minhaVez = true;
                           idJogador = 1;
-                        }else if(jogada.equals("2")){
+                        }else if(jogada.equals("2")) {
 
-                          idJogador = 2;
-                          minhaVez = false;
+                            idJogador = 2;
+                            minhaVez = false;
 
-                        }else{
+                        }else if(jogada.equals("venceu")){
+
+                            venceu = true;
+                            minhaVez =false;
+
+                            while(true){}
+
+                        }else {
                             // aqui vão as jogadas
                             atualizarJogadaOponente(jogada);
 
@@ -937,8 +945,8 @@ public class VisaoMultiplayer extends Visao{
                                     chave = casa[peçaSelecionada.getPosX() - 1][peçaSelecionada.getPosY() + 1]
                                             .getPeça().getChaveDaPeça();
 
-                                    peçaDeletar = casa[peçaSelecionada.getPosX() - 1][peçaSelecionada.getPosY() + 1]
-                                            .getPeça();
+                                    peçasVermelhas.remove(casa[peçaSelecionada.getPosX() - 1][peçaSelecionada.getPosY() + 1]
+                                            .getPeça());
 
                                     casa[peçaSelecionada.getPosX() - 1][peçaSelecionada.getPosY() + 1].removePeça();
 
@@ -951,8 +959,8 @@ public class VisaoMultiplayer extends Visao{
                                     chave = casa[peçaSelecionada.getPosX() - 1][peçaSelecionada.getPosY() - 1]
                                             .getPeça().getChaveDaPeça();
 
-                                    peçaDeletar = casa[peçaSelecionada.getPosX() - 1][peçaSelecionada.getPosY() - 1]
-                                            .getPeça();
+                                    peçasBrancas.remove(casa[peçaSelecionada.getPosX() - 1][peçaSelecionada.getPosY() - 1]
+                                            .getPeça());
 
                                     casa[peçaSelecionada.getPosX() - 1][peçaSelecionada.getPosY() - 1].removePeça();
                                 }
@@ -1039,8 +1047,8 @@ public class VisaoMultiplayer extends Visao{
                                             .getPeça().getChaveDaPeça();
 
                                     // deletar peça do array inimigo
-                                    peçaDeletar = casa[peçaSelecionada.getPosX() + 1][peçaSelecionada.getPosY() + 1]
-                                            .getPeça();
+                                    peçasVermelhas.remove(casa[peçaSelecionada.getPosX() + 1][peçaSelecionada.getPosY() + 1]
+                                            .getPeça());
 
                                     casa[peçaSelecionada.getPosX() + 1][peçaSelecionada.getPosY() + 1].removePeça();
 
@@ -1053,8 +1061,8 @@ public class VisaoMultiplayer extends Visao{
                                     chave = casa[peçaSelecionada.getPosX() + 1][peçaSelecionada.getPosY() - 1]
                                             .getPeça().getChaveDaPeça();
 
-                                    peçaDeletar = casa[peçaSelecionada.getPosX() + 1][peçaSelecionada.getPosY() - 1]
-                                            .getPeça();
+                                    peçasBrancas.remove(casa[peçaSelecionada.getPosX() + 1][peçaSelecionada.getPosY() - 1]
+                                            .getPeça());
 
                                     casa[peçaSelecionada.getPosX() + 1][peçaSelecionada.getPosY() - 1].removePeça();
                                 }
@@ -1430,7 +1438,11 @@ public class VisaoMultiplayer extends Visao{
                 // baixo direita
                 if(c.getX() > peçaSelecionada.getPosX() & c.getY() > peçaSelecionada.getPosY()){
 
-                    peçasVermelhas.remove(casa[c.getX()-1][c.getY()-1].getPeça());
+                    if(idJogador == 1) {
+                        peçasVermelhas.remove(casa[c.getX() - 1][c.getY() - 1].getPeça());
+                    }else{
+                        peçasBrancas.remove(casa[c.getX() - 1][c.getY() - 1].getPeça());
+                    }
 
                     chave = casa[c.getX()-1][c.getY()-1].getPeça().getChaveDaPeça();
                     casa[c.getX()-1][c.getY()-1].removePeça();
@@ -1448,7 +1460,11 @@ public class VisaoMultiplayer extends Visao{
                 //baixo esquerda
                 else if(c.getX() < peçaSelecionada.getPosX() & c.getY() > peçaSelecionada.getPosY()){
 
-                    peçasVermelhas.remove(casa[c.getX()+1][c.getY()-1].getPeça());
+                    if(idJogador == 1) {
+                        peçasVermelhas.remove(casa[c.getX() - 1][c.getY() - 1].getPeça());
+                    }else{
+                        peçasBrancas.remove(casa[c.getX() - 1][c.getY() - 1].getPeça());
+                    }
 
                     chave = casa[c.getX()+1][c.getY()-1].getPeça().getChaveDaPeça();
                     casa[c.getX()+1][c.getY()-1].removePeça();
@@ -1466,7 +1482,11 @@ public class VisaoMultiplayer extends Visao{
                 else if(c.getX() < peçaSelecionada.getPosX() & c.getY() < peçaSelecionada.getPosY()){
 
 
-                    peçasVermelhas.remove(casa[c.getX()+1][c.getY()+1].getPeça());
+                    if(idJogador == 1) {
+                        peçasVermelhas.remove(casa[c.getX() - 1][c.getY() - 1].getPeça());
+                    }else{
+                        peçasBrancas.remove(casa[c.getX() - 1][c.getY() - 1].getPeça());
+                    }
 
                     chave = casa[c.getX()+1][c.getY()+1].getPeça().getChaveDaPeça();
                     casa[c.getX()+1][c.getY()+1].removePeça();
@@ -1483,7 +1503,11 @@ public class VisaoMultiplayer extends Visao{
                 // cima direita
                 else if(c.getX() > peçaSelecionada.getPosX() & c.getY() < peçaSelecionada.getPosY()){
 
-                    peçasVermelhas.remove(casa[c.getX()-1][c.getY()+1].getPeça());
+                    if(idJogador == 1) {
+                        peçasVermelhas.remove(casa[c.getX() - 1][c.getY() - 1].getPeça());
+                    }else{
+                        peçasBrancas.remove(casa[c.getX() - 1][c.getY() - 1].getPeça());
+                    }
 
                     chave = casa[c.getX()-1][c.getY()+1].getPeça().getChaveDaPeça();
                     casa[c.getX()-1][c.getY()+1].removePeça();
@@ -1744,6 +1768,25 @@ public class VisaoMultiplayer extends Visao{
             peçaEscolhidaInimigo.setXY(x,y);
             peçaEscolhidaInimigo.setPosicaoPeça(casa[x][y].getPosicao());
 
+            if(idJogador == 1){
+
+                if( y == 7){
+                    peçaEscolhidaInimigo.setRainha(true);
+                    peçaEscolhidaInimigo.setImagemPeça
+                            (getNovaImagem().retorneImagem(R.drawable.pecavermelharainha));
+                }
+
+            }else{
+
+                if(y==0){
+
+                    peçaEscolhidaInimigo.setRainha(true);
+                    peçaEscolhidaInimigo.setImagemPeça
+                            (getNovaImagem().retorneImagem(R.drawable.pecaazulrainha));
+                }
+
+            }
+
         }else{// comer
 
             int posAtual=3;
@@ -1809,6 +1852,11 @@ public class VisaoMultiplayer extends Visao{
             /*-------------------INICIO DA SELEÇÃO DE PEÇA COMIDA--------------------------------*/
 
             while(posAtual < tamanho){
+
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                }
 
                 String chave1 = Character.toString(jogada.charAt(posAtual));
                 String chave2 = Character.toString(jogada.charAt(posAtual+1));
@@ -1880,7 +1928,14 @@ public class VisaoMultiplayer extends Visao{
                 //--------------Peça que foi comida-----------------------------------------------
 
                 casa[comida.getPosX()][comida.getPosY()].removePeça();
-                peçaDeletar = comida;
+
+                if(idJogador == 1){
+
+                    peçasBrancas.remove(comida);
+                }else{
+
+                    peçasVermelhas.remove(comida);
+                }
 
                 if(idJogador == 1){
                     if(y == 7){
@@ -1896,11 +1951,6 @@ public class VisaoMultiplayer extends Visao{
                         peçaEscolhidaInimigo.setImagemPeça
                                 (getNovaImagem().retorneImagem(R.drawable.pecaazulrainha));
                     }
-                }
-
-                try {
-                    Thread.sleep(1500);
-                } catch (InterruptedException e) {
                 }
 
                 posAtual = posAtual +5;
@@ -1961,4 +2011,6 @@ public class VisaoMultiplayer extends Visao{
 
         }
     }
+
+    public PrintWriter getEscrever() { return escrever; }
 }
