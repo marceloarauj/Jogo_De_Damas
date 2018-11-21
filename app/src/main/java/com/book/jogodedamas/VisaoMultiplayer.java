@@ -1519,7 +1519,7 @@ public class VisaoMultiplayer extends Visao{
                     casa[peçaSelecionada.getPosX()][peçaSelecionada.getPosY()].
                             setPeça(peçaSelecionada);
 
-                    //jogada = jogada+peçaSelecionada.getPosX()+peçaSelecionada.getPosY()+"";
+                    ///jogada = jogada+peçaSelecionada.getPosX()+peçaSelecionada.getPosY()+"";
 
                 }
                 chavePos = chave+"";
